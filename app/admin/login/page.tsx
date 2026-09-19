@@ -23,7 +23,15 @@ export default function AdminLoginPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
-      setError('Invalid email or password. Please try again.')
+      // Only mask genuine credential failures; surface everything else
+      // (network/config errors) so misconfiguration is obvious.
+      const isCredentialError =
+        error.status === 400 || /invalid login credentials/i.test(error.message)
+      setError(
+        isCredentialError
+          ? 'Invalid email or password. Please try again.'
+          : `Sign-in failed: ${error.message}`
+      )
       setLoading(false)
       return
     }
