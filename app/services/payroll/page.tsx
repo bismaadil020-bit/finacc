@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { pageMetadata } from '@/lib/seo/metadata'
 import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
 import JsonLd from '@/components/seo/JsonLd'
+import ServiceFAQ from '@/components/sections/ServiceFAQ'
+import { serviceFaqs } from '@/lib/seo/faqs'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -132,6 +134,8 @@ export default function PayrollPage() {
             </div>
           </div>
         </section>
+
+        <ServiceFAQ faqs={serviceFaqs['payroll']} />
 
         <section className="bg-brand-navy py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-20" />

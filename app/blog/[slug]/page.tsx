@@ -2,12 +2,12 @@ import { createServerClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/lib/seo/metadata'
-import { articleSchema, breadcrumbSchema } from '@/lib/seo/schema'
+import { AUTHOR, articleSchema, breadcrumbSchema } from '@/lib/seo/schema'
 import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { Clock, ArrowLeft, Tag, Calendar } from 'lucide-react'
+import { Clock, ArrowLeft, Tag, Calendar, User } from 'lucide-react'
 
 interface Props {
   params: { slug: string }
@@ -110,6 +110,11 @@ export default async function BlogPostPage({ params }: Props) {
             </h1>
 
             <div className="flex flex-wrap items-center gap-4 text-slate-400 text-sm font-dm-sans">
+              <Link href="/about" rel="author" className="flex items-center gap-1.5 hover:text-white transition-colors">
+                <User className="w-4 h-4" />
+                <span className="text-slate-200 font-semibold">{AUTHOR.name}</span>
+                <span className="hidden sm:inline">· {AUTHOR.jobTitle}</span>
+              </Link>
               {post.published_at && (
                 <span className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4" />

@@ -3,7 +3,7 @@ import { Sora, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 import JsonLd from '@/components/seo/JsonLd'
-import { organizationSchema, websiteSchema } from '@/lib/seo/schema'
+import { authorPersonSchema, organizationSchema, websiteSchema } from '@/lib/seo/schema'
 import './globals.css'
 
 const sora = Sora({
@@ -98,7 +98,7 @@ export default function RootLayout({
       <body className="antialiased bg-white text-brand-navy">
         <SmoothScroll>{children}</SmoothScroll>
         <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
-        <JsonLd data={[organizationSchema, websiteSchema]} />
+        <JsonLd data={[organizationSchema, websiteSchema, authorPersonSchema]} />
       </body>
     </html>
   )

@@ -138,7 +138,7 @@ export default function AboutPage() {
                   {/* Attribution row */}
                   <div className="relative z-10 border-t border-white/10 mx-10 mb-10 pt-6 flex items-center justify-between gap-4">
                     <div>
-                      <div className="font-dm-sans font-bold text-white text-sm">Sohail Khan</div>
+                      <div id="sohail-khan" className="font-dm-sans font-bold text-white text-sm">Sohail Khan</div>
                       <div className="font-dm-sans text-slate-400 text-xs mt-0.5">Chief Executive Officer, FinAccSolutions</div>
                     </div>
                     {/* Founded badge inline */}

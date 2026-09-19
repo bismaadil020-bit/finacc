@@ -1,6 +1,25 @@
 import { SITE_NAME, SITE_URL } from './site'
 
 const ORG_ID = `${SITE_URL}/#organization`
+const AUTHOR_ID = `${SITE_URL}/about#sohail-khan`
+
+export const AUTHOR = {
+  name: 'Sohail Khan',
+  jobTitle: 'Chief Executive Officer',
+  bio: 'Founder and CEO of FinAccSolutions. Leads a team of Big 4-trained finance professionals delivering IFRS and US GAAP reporting, group consolidation and outsourced finance functions to businesses in the UK, US and Germany.',
+}
+
+export const authorPersonSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': AUTHOR_ID,
+  name: AUTHOR.name,
+  jobTitle: AUTHOR.jobTitle,
+  description: AUTHOR.bio,
+  worksFor: { '@id': ORG_ID },
+  url: `${SITE_URL}/about`,
+  knowsAbout: ['IFRS', 'US GAAP', 'Group Consolidation', 'Outsourced Finance', 'Bookkeeping', 'Financial Modelling'],
+}
 
 const SERVICE_CATALOG: [string, string][] = [
   ['Bookkeeping', '/services/bookkeeping'],
@@ -24,7 +43,7 @@ export const organizationSchema = {
   description:
     'Big 4-trained virtual accountants and bookkeepers. IFRS & US GAAP certified. Bookkeeping, payroll, group consolidation, budgeting and CFO services for businesses across 30+ countries.',
   foundingDate: '2022',
-  founder: { '@type': 'Person', name: 'Sohail Khan' },
+  founder: { '@id': AUTHOR_ID },
   address: { '@type': 'PostalAddress', addressLocality: 'Karachi', addressCountry: 'PK' },
   areaServed: ['United Kingdom', 'United States', 'Germany', 'United Arab Emirates', 'Australia', 'Canada'].map(name => ({
     '@type': 'Country',
@@ -136,7 +155,7 @@ export function articleSchema(opts: {
     datePublished: opts.publishedTime ?? undefined,
     dateModified: opts.modifiedTime ?? opts.publishedTime ?? undefined,
     keywords: opts.tags?.join(', '),
-    author: { '@type': 'Organization', '@id': ORG_ID, name: SITE_NAME },
+    author: { '@id': AUTHOR_ID },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${opts.path}` },
     inLanguage: 'en',

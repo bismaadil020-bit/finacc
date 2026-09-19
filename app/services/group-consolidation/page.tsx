@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { pageMetadata } from '@/lib/seo/metadata'
 import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
 import JsonLd from '@/components/seo/JsonLd'
+import ServiceFAQ from '@/components/sections/ServiceFAQ'
+import { serviceFaqs } from '@/lib/seo/faqs'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight, Building2, Clock, Users, BarChart3, FileText, Globe } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -235,6 +237,8 @@ export default function GroupConsolidationPage() {
         </section>
 
         {/* CTA */}
+        <ServiceFAQ faqs={serviceFaqs['group-consolidation']} />
+
         <section className="bg-brand-navy py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-20" />
           <div className="max-w-content mx-auto px-6 text-center relative z-10">

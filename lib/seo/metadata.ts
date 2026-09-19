@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { SITE_NAME, SITE_URL } from './site'
+import { AUTHOR } from './schema'
 
 interface PageMeta {
   title: string
@@ -43,7 +44,7 @@ export function pageMetadata({
       type,
       locale: 'en_GB',
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
-      ...(type === 'article' ? { publishedTime, modifiedTime, authors: [SITE_NAME] } : {}),
+      ...(type === 'article' ? { publishedTime, modifiedTime, authors: [AUTHOR.name] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
@@ -51,6 +52,7 @@ export function pageMetadata({
       description,
       images: [ogImage],
     },
+    ...(type === 'article' ? { authors: [{ name: AUTHOR.name, url: `${SITE_URL}/about` }] } : {}),
     ...(noIndex ? { robots: { index: false, follow: false } } : {}),
   }
 }
