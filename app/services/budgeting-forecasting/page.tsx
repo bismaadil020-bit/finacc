@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +10,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Budgeting & Forecasting Services | FinAccSolutions',
   description: 'Annual budgets, rolling 12-month forecasts, KPI dashboards, and board pack preparation — delivered by Big 4-trained offshore finance professionals.',
-}
+  path: '/services/budgeting-forecasting',
+})
 
 const included = [
   'Annual budget build — bottom-up, by department',
@@ -27,10 +31,22 @@ const forWhom = [
   { title: 'PE-Backed Management Teams', desc: 'Monthly reporting to sponsors, 100-day plan financials, and rolling reforecasts. We build the process and run it — so your team focuses on execution.' },
 ]
 
+const schema = [
+  serviceSchema({
+    name: 'Budgeting & Forecasting',
+    serviceType: 'Financial Planning & Analysis',
+    description: 'Annual budgets, rolling 12-month forecasts, KPI dashboards, and board pack preparation — delivered by Big 4-trained offshore finance professionals.',
+    path: '/services/budgeting-forecasting',
+    offers: included,
+  }),
+  breadcrumbSchema([{ name: 'Services', path: '/services' }, { name: 'Budgeting & Forecasting', path: '/services/budgeting-forecasting' }]),
+]
+
 export default function BudgetingForecastingPage() {
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white pt-28">
 
         <section className="bg-brand-navy -mt-28 pt-40 pb-24 relative overflow-hidden">

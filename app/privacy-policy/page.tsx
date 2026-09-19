@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Privacy Policy | FinAccSolutions',
   description: 'How FinAccSolutions collects, uses, and protects your personal information.',
-  robots: { index: true, follow: true },
-}
+  path: '/privacy-policy',
+})
 
 export default function PrivacyPolicyPage() {
   return (

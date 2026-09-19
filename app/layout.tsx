@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Sora, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import SmoothScroll from '@/components/providers/SmoothScroll'
+import JsonLd from '@/components/seo/JsonLd'
+import { organizationSchema, websiteSchema } from '@/lib/seo/schema'
 import './globals.css'
 
 const sora = Sora({
@@ -51,21 +53,12 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.finaccsolutions.com',
     siteName: 'FinAccSolutions',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'FinAccSolutions — Virtual Bookkeeping & Accounting Services',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Virtual Bookkeeping & Accounting Services | FinAccSolutions',
     description:
       'Big 4-trained virtual accountants. IFRS & US GAAP certified. Group consolidation, payroll & CFO services. 30+ countries served.',
-    images: ['/og-image.jpg'],
   },
   icons: {
     icon: [
@@ -105,24 +98,7 @@ export default function RootLayout({
       <body className="antialiased bg-white text-brand-navy">
         <SmoothScroll>{children}</SmoothScroll>
         <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
-        <Script id="org-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'ProfessionalService',
-          name: 'FinAccSolutions',
-          url: 'https://www.finaccsolutions.com',
-          logo: 'https://www.finaccsolutions.com/brand-logo.png',
-          description: 'Big 4-trained virtual accountants and bookkeepers. IFRS & US GAAP certified. Bookkeeping, payroll, group consolidation, budgeting and CFO services for businesses across 30+ countries.',
-          foundingDate: '2022',
-          founder: { '@type': 'Person', name: 'Sohail Khan' },
-          address: { '@type': 'PostalAddress', addressLocality: 'Karachi', addressCountry: 'PK' },
-          areaServed: 'Worldwide',
-          email: 'hello@finaccsolutions.com',
-          sameAs: [
-            'https://www.linkedin.com/company/finaccsolutions',
-            'https://www.instagram.com/fin_accsolutions/',
-          ],
-          serviceType: ['Bookkeeping', 'Payroll Services', 'Budgeting & Forecasting', 'Fundraising Support', 'Group Consolidation', 'Tax Records & Compliance', 'Virtual CFO'],
-        }) }} />
+        <JsonLd data={[organizationSchema, websiteSchema]} />
       </body>
     </html>
   )

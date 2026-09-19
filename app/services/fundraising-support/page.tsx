@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight, LineChart, Users, TrendingUp, FileText } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +10,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Fundraising Finance Support | Investor-Ready Financial Models | FinAccSolutions',
   description: 'Big 4-trained financial modelling for pre-Series A and growth-stage companies. Three-statement models, DCF valuations, and investor data room support — built to close rounds.',
-}
+  path: '/services/fundraising-support',
+})
 
 const deliverables = [
   '3-statement financial model (P&L, balance sheet, cash flow)',
@@ -60,10 +64,22 @@ const audiences = [
   },
 ]
 
+const schema = [
+  serviceSchema({
+    name: 'Fundraising Finance Support',
+    serviceType: 'Financial Modelling & Valuation',
+    description: 'Big 4-trained financial modelling for pre-Series A and growth-stage companies. Three-statement models, DCF valuations, and investor data room support — built to close rounds.',
+    path: '/services/fundraising-support',
+    offers: deliverables,
+  }),
+  breadcrumbSchema([{ name: 'Services', path: '/services' }, { name: 'Fundraising Finance Support', path: '/services/fundraising-support' }]),
+]
+
 export default function FundraisingSupportPage() {
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white pt-28">
 
         {/* Hero */}

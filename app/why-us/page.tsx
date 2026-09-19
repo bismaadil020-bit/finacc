@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight, Star, TrendingUp, Award, Users } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +8,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Why FinAccSolutions | Big 4-Trained. Offshore Economics.',
   description: 'Finance expertise you\'d pay Big 4 rates for, at a fraction of the cost. Trusted by holding groups, funded startups, and international finance teams.',
-}
+  path: '/why-us',
+})
 
 const differentiators = [
   {

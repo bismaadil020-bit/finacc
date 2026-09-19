@@ -1,6 +1,9 @@
 import { createServerClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { articleSchema, breadcrumbSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -27,18 +30,16 @@ async function getPost(slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(params.slug)
-  if (!post) return { title: 'Not Found' }
-  return {
+  if (!post) return { title: 'Not Found', robots: { index: false } }
+  return pageMetadata({
     title: `${post.title} | FinAccSolutions Blog`,
-    description: post.excerpt ?? undefined,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt ?? undefined,
-      images: post.featured_image ? [post.featured_image] : undefined,
-      type: 'article',
-      publishedTime: post.published_at ?? undefined,
-    },
-  }
+    description: post.excerpt ?? `${post.title} — insights from FinAccSolutions' Big 4-trained finance team.`,
+    path: `/blog/${post.slug}`,
+    type: 'article',
+    image: post.featured_image ?? undefined,
+    publishedTime: post.published_at ?? undefined,
+    modifiedTime: post.updated_at ?? undefined,
+  })
 }
 
 // Simple markdown to HTML (no external lib needed for basic formatting)
@@ -67,9 +68,23 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getPost(params.slug)
   if (!post) notFound()
 
+  const schema = [
+    articleSchema({
+      title: post.title,
+      description: post.excerpt,
+      path: `/blog/${post.slug}`,
+      image: post.featured_image,
+      publishedTime: post.published_at,
+      modifiedTime: post.updated_at,
+      tags: post.tags,
+    }),
+    breadcrumbSchema([{ name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${post.slug}` }]),
+  ]
+
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white">
         {/* Hero */}
         <div className="bg-brand-navy pt-32 pb-12 relative overflow-hidden">

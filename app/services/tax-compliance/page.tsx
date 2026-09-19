@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +10,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Tax Records & Compliance | FinAccSolutions',
   description: 'Indirect tax returns, corporation tax records, tax provision workings, and tax authority correspondence support — organized and maintained by Big 4-trained offshore specialists.',
-}
+  path: '/services/tax-compliance',
+})
 
 const included = [
   'Indirect tax return preparation & submission',
@@ -27,10 +31,22 @@ const forWhom = [
   { title: 'Fast-Growing Businesses Adding Complexity', desc: 'New revenue streams, overseas entities, and intercompany transactions add tax complexity fast. We build the record-keeping infrastructure that scales with you.' },
 ]
 
+const schema = [
+  serviceSchema({
+    name: 'Tax Records & Compliance',
+    serviceType: 'Tax Compliance',
+    description: 'Indirect tax returns, corporation tax records, tax provision workings, and tax authority correspondence support — organized and maintained by Big 4-trained offshore specialists.',
+    path: '/services/tax-compliance',
+    offers: included,
+  }),
+  breadcrumbSchema([{ name: 'Services', path: '/services' }, { name: 'Tax Records & Compliance', path: '/services/tax-compliance' }]),
+]
+
 export default function TaxCompliancePage() {
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white pt-28">
 
         <section className="bg-brand-navy -mt-28 pt-40 pb-24 relative overflow-hidden">

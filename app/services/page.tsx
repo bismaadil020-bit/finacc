@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Users, TrendingUp, LineChart, Building2, ClipboardCheck } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +8,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Finance & Accounting Services | FinAccSolutions',
   description: 'Outsourced bookkeeping, payroll, group consolidation, fundraising support, budgeting & forecasting, and tax compliance — delivered by Big 4-trained offshore professionals.',
-}
+  path: '/services',
+})
 
 const services = [
   {

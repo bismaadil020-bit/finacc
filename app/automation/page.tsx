@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import React from 'react'
 import Link from 'next/link'
 import {
@@ -15,16 +16,11 @@ import Button from '@/components/ui/Button'
 import SmoothScrollLink from '@/components/ui/SmoothScrollLink'
 import ToolBadge from '@/components/ui/ToolBadge'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Finance Automation Services | FinAccSolutions',
   description: 'From 21-day close to 5 days. FinAccSolutions delivers finance automation that eliminates manual entry, accelerates reporting, and gives you real-time financial visibility — built around your existing stack.',
-  alternates: { canonical: '/automation' },
-  openGraph: {
-    title: 'Finance Automation Services | FinAccSolutions',
-    description: 'Eliminate manual finance work. FinAccSolutions automates your AP, reconciliations, payroll, reporting, and more — or builds custom automation workflows for your in-house team.',
-    url: 'https://www.finaccsolutions.com/automation',
-  },
-}
+  path: '/automation',
+})
 
 const tracks = [
   {

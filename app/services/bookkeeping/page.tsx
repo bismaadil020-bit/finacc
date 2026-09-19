@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +10,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Outsourced Bookkeeping Services | FinAccSolutions',
   description: 'Accurate, organized bookkeeping delivered offshore by Big 4-trained professionals. Monthly ledger maintenance, bank reconciliations, and management accounts — at 60–80% less than in-house.',
-}
+  path: '/services/bookkeeping',
+})
 
 const included = [
   'Monthly ledger maintenance & transaction coding',
@@ -33,10 +37,22 @@ const forWhom = [
   { title: 'Businesses Replacing a Local Bookkeeper', desc: 'Local bookkeepers are expensive and inconsistent. Our offshore professionals work to the same standard for significantly less.' },
 ]
 
+const schema = [
+  serviceSchema({
+    name: 'Outsourced Bookkeeping',
+    serviceType: 'Bookkeeping',
+    description: 'Accurate, organized bookkeeping delivered offshore by Big 4-trained professionals. Monthly ledger maintenance, bank reconciliations, and management accounts — at 60–80% less than in-house.',
+    path: '/services/bookkeeping',
+    offers: included,
+  }),
+  breadcrumbSchema([{ name: 'Services', path: '/services' }, { name: 'Outsourced Bookkeeping', path: '/services/bookkeeping' }]),
+]
+
 export default function BookkeepingPage() {
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white pt-28">
 
         <section className="bg-brand-navy -mt-28 pt-40 pb-24 relative overflow-hidden">

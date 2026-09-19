@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Link from 'next/link'
 import { ArrowRight, Target, Eye, Shield, Zap, Globe } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,16 +8,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'About FinAccSolutions | Big 4-Trained Finance Outsourcing',
   description: 'Founded by Big 4 alumni, FinAccSolutions bridges elite global financial expertise with cost-efficient offshore execution — serving holding groups, funded startups, and international businesses across 30+ countries.',
-  alternates: { canonical: '/about' },
-  openGraph: {
-    title: 'About FinAccSolutions | Big 4-Trained Finance Outsourcing',
-    description: 'Founded by Big 4 alumni, FinAccSolutions bridges elite global financial expertise with cost-efficient offshore execution — serving businesses across 30+ countries.',
-    url: 'https://www.finaccsolutions.com/about',
-  },
-}
+  path: '/about',
+})
 
 const stats = [
   { value: '30+', label: 'Countries Served' },

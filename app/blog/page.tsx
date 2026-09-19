@@ -1,16 +1,17 @@
 import { createServerClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import type { BlogPost } from '@/lib/supabase/types'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { Clock, Tag, ArrowRight } from 'lucide-react'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Blog — Finance & Accounting Insights | FinAccSolutions',
-  description:
-    'Expert articles on bookkeeping, IFRS, group consolidation, fundraising finance, and virtual accounting teams. Written by Big 4-trained professionals.',
-}
+  description: 'Expert articles on bookkeeping, IFRS, group consolidation, fundraising finance, and virtual accounting teams. Written by Big 4-trained professionals.',
+  path: '/blog',
+})
 
 async function getPosts(): Promise<BlogPost[]> {
   try {

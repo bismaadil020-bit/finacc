@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ContactForm from '@/components/sections/ContactForm'
 import SectionHeader from '@/components/ui/SectionHeader'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Contact FinAccSolutions | Book Your Free Consultation',
   description: 'Talk to a Big 4-trained finance specialist about your bookkeeping, consolidation, payroll, or fundraising needs. No hard sell — just a straightforward conversation.',
-}
+  path: '/contact',
+})
 
 export default function ContactPage() {
   return (

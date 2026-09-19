@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight, Building2, Clock, Users, BarChart3, FileText, Globe } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +10,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Group Consolidation Services | IFRS 10 Specialists | FinAccSolutions',
   description: 'IFRS 10-compliant consolidated financial statements for multi-entity groups — delivered by Big 4-trained specialists in 5–7 working days. Cut your close cycle by up to 78%.',
-}
+  path: '/services/group-consolidation',
+})
 
 const included = [
   'Full consolidation workings & journals',
@@ -49,10 +53,22 @@ const steps = [
 
 const tools = ['LucaNet', 'SAP BPC', 'Hyperion', 'Tagetik', 'OneStream']
 
+const schema = [
+  serviceSchema({
+    name: 'Group Consolidation (IFRS 10)',
+    serviceType: 'Group Consolidation',
+    description: 'IFRS 10-compliant consolidated financial statements for multi-entity groups — delivered by Big 4-trained specialists in 5–7 working days. Cut your close cycle by up to 78%.',
+    path: '/services/group-consolidation',
+    offers: included,
+  }),
+  breadcrumbSchema([{ name: 'Services', path: '/services' }, { name: 'Group Consolidation (IFRS 10)', path: '/services/group-consolidation' }]),
+]
+
 export default function GroupConsolidationPage() {
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white pt-28">
 
         {/* Hero */}

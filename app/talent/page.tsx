@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight, BookOpen, Users, TrendingUp, LineChart, Building2, Briefcase } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +8,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Offshore Finance Talent | Big 4-Trained Professionals | FinAccSolutions',
   description: 'Pre-vetted offshore finance professionals with Big 4 & Big 10 credentials, IFRS & US GAAP certified. Dedicated resources integrated into your team within 2 weeks.',
-}
+  path: '/talent',
+})
 
 const credentials = [
   {

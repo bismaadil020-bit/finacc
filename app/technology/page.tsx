@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
 import Link from 'next/link'
 import { ArrowRight, Search, GitBranch, Zap } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +8,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Technology & Tools | FinAccSolutions',
   description: 'From LucaNet and SAP BPC to QuickBooks and Xero — we work with the tools your finance team already uses. No rip-and-replace required.',
-}
+  path: '/technology',
+})
 
 const consolidationTools = [
   { name: 'LucaNet', color: '#005CA9', use: 'Multi-entity consolidation & financial planning', ideal: 'Mid-market groups with 3–20 entities' },

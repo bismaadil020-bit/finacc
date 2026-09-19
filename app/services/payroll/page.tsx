@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
@@ -7,10 +10,11 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import AnimateIn from '@/components/ui/AnimateIn'
 import Button from '@/components/ui/Button'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Outsourced Payroll Services | International & Multi-Currency Payroll | FinAccSolutions',
   description: 'Accurate, on-time payroll for international teams. Statutory compliance, multi-currency processing, and full payroll reporting — delivered by Big 4-trained offshore specialists.',
-}
+  path: '/services/payroll',
+})
 
 const included = [
   'Monthly & weekly payroll runs',
@@ -35,10 +39,22 @@ const forWhom = [
   { title: 'Businesses With Payroll Errors or Delays', desc: 'If your current payroll is running late or producing errors, that\'s a direct risk to employee trust and regulatory compliance. We fix it — from month one.' },
 ]
 
+const schema = [
+  serviceSchema({
+    name: 'Outsourced Payroll',
+    serviceType: 'Payroll Services',
+    description: 'Accurate, on-time payroll for international teams. Statutory compliance, multi-currency processing, and full payroll reporting — delivered by Big 4-trained offshore specialists.',
+    path: '/services/payroll',
+    offers: included,
+  }),
+  breadcrumbSchema([{ name: 'Services', path: '/services' }, { name: 'Outsourced Payroll', path: '/services/payroll' }]),
+]
+
 export default function PayrollPage() {
   return (
     <>
       <Navbar />
+      <JsonLd data={schema} />
       <main className="min-h-screen bg-white pt-28">
 
         <section className="bg-brand-navy -mt-28 pt-40 pb-24 relative overflow-hidden">
